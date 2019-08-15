@@ -1,18 +1,32 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Home from './assets/componentes/Home'
+import HomeScreen from './assets/componentes/Home'
+import MenuJogosScreen from './assets/componentes/menus/MenuJogos'
+import MenuCognicaoScreen from './assets/componentes/menus/MenuCognicao'
+import MenuCorrespondenciaScreen from './assets/componentes/menus/MenuCorrespondencia'
+import {createStackNavigator, createAppContainer} from 'react-navigation';
+
+const MainNavigator = createStackNavigator(
+	{
+	
+	  Home: HomeScreen,
+	  MenuJogos: MenuJogosScreen,
+	  MenuCognicao: MenuCognicaoScreen,
+	  MenuCorrespondencia: MenuCorrespondenciaScreen
+	},
+	{
+	  initialRouteName: "Home",
+	  defaultNavigationOptions: {
+	      header: null
+	  }
+	}
+);
+
+const AppContainer = createAppContainer(MainNavigator);
 
 export default function App() {
   return (
-    <Home></Home>
+    <AppContainer />
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+

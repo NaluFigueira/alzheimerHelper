@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { TouchableOpacity, Text } from 'react-native';
+import estilos from './estilos/estilos.js';
 
 export default class Botao extends React.Component{
   render(){  
@@ -15,22 +16,3 @@ export default class Botao extends React.Component{
   }
 }
 
-const estilos = StyleSheet.create({
-  botao:{
-    padding: 15,
-    borderRadius: 10,
-  },
-  operacao:{
-    margin: "5%",
-    backgroundColor:"#FFD917",
-  },
-  auxilio:{
-    margin: "10%",
-    backgroundColor:"#B1FF17",
-  },
-  texto: {
-    color: "black", 
-    fontWeight: 'bold',
-    textAlign: 'center'
-  }
-});
