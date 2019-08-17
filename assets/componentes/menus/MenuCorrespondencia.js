@@ -10,7 +10,9 @@ export default class MenuCorrespondencia extends React.Component{
   render(){
     return (
         <View style={estilos.container}>
-          <Botao aoClicar = {() => this.props.navigation.push('MenuJogos')}
+          <Botao aoClicar = {() => this.props.navigation.push('CorrespondenciaCores',{
+            numLinhas: 3, numColunas:2, nivel:1
+          })}
                  titulo = "CORES" 
                  operacao = {true} />
           <Botao aoClicar = {() => this.props.navigation.push('MenuJogos')}

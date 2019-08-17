@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native'
+
   
 export default estilos = StyleSheet.create({   
   container:{
@@ -11,7 +12,6 @@ export default estilos = StyleSheet.create({
     justifyContent: 'center'
   },
   voltarSeguir:{
-    flex:0.25,
     flexDirection: 'row',
     justifyContent: 'center'
   },
@@ -21,7 +21,8 @@ export default estilos = StyleSheet.create({
     resizeMode: 'contain'
   },
   botao:{
-    padding: 15,
+    paddingTop: 15,
+    paddingBottom: 15,
     borderRadius: 10,
   },
   operacao:{
@@ -29,13 +30,28 @@ export default estilos = StyleSheet.create({
     backgroundColor:"#FFD917",
   },
   auxilio:{
+    paddingRight: 15,
+    paddingLeft: 15,
     margin: "10%",
+    backgroundColor:"#B1FF17",
+  },
+  desfazer:{
+    paddingRight: 10,
+    paddingLeft: 10,
     backgroundColor:"#B1FF17",
   },
   texto: {
     color: "black", 
-    fontWeight: 'bold',
     textAlign: 'center'
+  },
+  grid:{
+    flex:0.5
+  },
+  tituloGrid:{
+    flex: 0.25, 
+    justifyContent: "space-around",
+    alignItems: 'center',
+    flexDirection: 'row'
   }
 })
 
