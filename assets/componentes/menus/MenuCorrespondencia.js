@@ -4,6 +4,12 @@ import Botao from '../Botao'
 import estilos from '../estilos/estilos.js'
 import {createStackNavigator, createAppContainer} from 'react-navigation';
 
+const cores = ["red","green","blue"],
+      letras = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K",
+               "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V",
+               "X", "Z"]
+
+
 export default class MenuCorrespondencia extends React.Component{
   
 
@@ -11,12 +17,15 @@ export default class MenuCorrespondencia extends React.Component{
     return (
         <View style={estilos.container}>
           <Botao aoClicar = {() => this.props.navigation.push('CorrespondenciaObjetos',{
-            numLinhas: 3, numColunas:2, nivel:1, objetosPassados: ["red","green","blue"], 
-            valorDesativacao: "white", cor: true
+            numLinhas: 3, numColunas:2, nivel:1, objetosPassados: cores, 
+            valorDesativacao: "white", tipo: "CORES"
           })}
                  titulo = "CORES" 
                  operacao = {true} />
-          <Botao aoClicar = {() => this.props.navigation.push('MenuJogos')}
+          <Botao aoClicar = {() => this.props.navigation.push('CorrespondenciaObjetos',{
+            numLinhas: 3, numColunas:2, nivel:1, objetosPassados: letras, 
+            valorDesativacao: "",  tipo: "LETRAS"
+          })}
                  titulo = "LETRAS" 
                  operacao = {true} />
           <Botao aoClicar = {() => this.props.navigation.push('MenuJogos')}
