@@ -1,6 +1,5 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, FlatList, Alert } from 'react-native';
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { View, TouchableOpacity, FlatList, Alert } from 'react-native';
 import estilos from '../estilos/estilos.js'
 import Botao from '../Botao';
 import BotaoDesfazer from '../BotaoDesfazer';
@@ -75,31 +74,51 @@ export default class CorrespondenciaCores extends React.Component{
 		else await this.setState({parTemporario:-1});
 	}
 
+	foiSelecionadoPar(){
+		return this.state.parAtivo !== -1
+	}
+
+	parSelecionadoCorreto(posicao){
+		return auxiliar[this.state.parAtivo].cor === auxiliar[posicao].cor;
+	}
+
+	desativarQuadrado(posicao,vetor){
+		vetor[posicao].ativo = false;
+		vetor[posicao].selecionado = false;
+	}
+
+	trocarQuadradoSelecionado(posicao1,posicao2,vetor){
+		vetor[posicao1].selecionado = false;
+		vetor[posicao2].selecionado = true;
+	}
+
+	selecionarQuadrado(posicao,vetor){
+		if(vetor[posicao].cor !== "white"){
+			vetor[posicao].selecionado = true;
+			return true;
+		}
+		return false;
+	}
+
 	async selecionarQuadrado(index){
 		this.clonarCores();
 		this.clonarPar();
 		var auxiliar = this.state.cores;				
-		if(this.state.parAtivo !== -1){
-			if(auxiliar[this.state.parAtivo].cor == auxiliar[index].cor){
-				auxiliar[this.state.parAtivo].ativo = false;
-				auxiliar[this.state.parAtivo].selecionado = false;
-				auxiliar[index].ativo = false;
-				auxiliar[index].selecionado = false;
+		if(this.foiSelecionadoPar()){
+			if(this.parSelecionadoCorreto(index)){
+				this.desativarQuadrado(auxiliar,this.state.parAtivo);
+				this.desativarQuadrado(auxiliar,index);
 				await this.setState({cores:auxiliar, parAtivo:-1}, () => this.clonarPar());
-				if(this.verificarVitoria()) this.alertarVitoria();
-
+				if(this.verificarVitoria()) this.lertarVitoria();
 			}
 			else{
-				auxiliar[this.state.parAtivo].selecionado = false;
-				auxiliar[index].selecionado = true;
+				this.trocarQuadradoSelecionado(this.state.parAtivo,index,auxiliar);
 				await this.setState({cores:auxiliar, parAtivo:index});
 			}
 		}
 		else{
-			if(auxiliar[index].cor !== "white"){
-				auxiliar[index].selecionado = true;
+			if(this.selecionarQuadrado(index,auxiliar))
 				await this.setState({cores:auxiliar, parAtivo:index});
-			}
 		}
 		
 	}
