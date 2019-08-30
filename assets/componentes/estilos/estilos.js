@@ -52,6 +52,7 @@ export default estilos = StyleSheet.create({
     justifyContent: "space-around",
     alignItems: 'center',
     flexDirection: 'row'
-  }
+  },
+  
 })
 

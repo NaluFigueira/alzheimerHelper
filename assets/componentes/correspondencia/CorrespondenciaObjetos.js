@@ -147,7 +147,7 @@ export default class CorrespondenciaObjetos extends React.Component{
  	}
 
  	avancarNivel(){
- 		if(this.state.nivel  == 4){
+ 		if(this.state.nivel  == 3){
  			this.alertarNivelMaximo();
  			this.props.navigation.push('MenuCorrespondencia');
  		}
@@ -205,14 +205,16 @@ export default class CorrespondenciaObjetos extends React.Component{
 					width: this.state.larguraFlatList/this.state.numColunas - 16,
 					backgroundColor:this.state.objetos[index].ativo&&this.state.tipo === "CORES"?item.objeto:"white",
 					borderColor: this.state.objetos[index].selecionado?"#FF9200":item.objeto,
-					borderWidth: this.state.objetos[index].selecionado?15:0
+					borderWidth: this.state.objetos[index].selecionado?this.state.tipo === "FORMAS"?5:15:0
 					}}>
 				{this.state.tipo === "CORES"?
 					<View />
 					:
 					<Objeto funcao = {() => this.selecionarQuadrado(index)}  
 					texto = {this.state.objetos[index].ativo?item.objeto:this.state.valorDesativacao}
-					tamanho = {30 - 2*this.state.nivel} />
+					tamanho = {this.state.tipo == "FORMAS"?100 - 15*this.state.nivel:30 - 2*this.state.nivel}
+					tipo = {this.state.tipo}
+					objeto = {item.objeto} />
 				}
 			</TouchableOpacity>
 		);
