@@ -13,7 +13,8 @@ export default estilos = StyleSheet.create({
   },
   voltarSeguir:{
     flexDirection: 'row',
-    justifyContent: 'center'
+    justifyContent: 'center',
+   
   },
   logo: {
     alignSelf: 'center',
@@ -51,7 +52,8 @@ export default estilos = StyleSheet.create({
     flex: 0.25, 
     justifyContent: "space-around",
     alignItems: 'center',
-    flexDirection: 'row'
+    flexDirection: 'row',
+   
   },
   
 })

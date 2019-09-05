@@ -16,9 +16,8 @@ export default class CorrespondenciaObjetos extends React.Component{
 			numColunas: this.props.navigation.getParam('numColunas',2),
 			numLinhas: this.props.navigation.getParam('numLinhas',3),
 			objetosPassados: this.props.navigation.getParam('objetosPassados',objetos),
-			valorDesativacao: this.props.navigation.getParam('valorDesativacao',"white"),
-			tipo: this.props.navigation.getParam('tipo',"CORES"),
 			nivel: this.props.navigation.getParam('nivel',1),
+			tipo: this.props.navigation.getParam('tipo',"CORES"),
 			objetos: [],
 			alturaFlatList: 0,
 			larguraFlatList: 0,
@@ -51,8 +50,12 @@ export default class CorrespondenciaObjetos extends React.Component{
 		for (var i = 0; i < tamanho/2; i++) {
 			var indiceAleatorio = Math.floor(Math.random()*tamanhoObjetos);
 			var objetoSorteado = this.state.objetosPassados[indiceAleatorio];
-			auxiliar.push({objeto:objetoSorteado, selecionado: false, ativo: true});
-			auxiliar.push({objeto:objetoSorteado, selecionado: false, ativo: true});
+			auxiliar.push({objeto:objetoSorteado.objeto,
+				tipoObjeto:objetoSorteado.tipoObjeto, 
+				selecionado: false, ativo: true});
+			auxiliar.push({objeto:objetoSorteado.objeto,
+				tipoObjeto:objetoSorteado.tipoObjeto, 
+				selecionado: false, ativo: true});
 		}
 		auxiliar = this.embaralhar(auxiliar);
 		await this.setState({objetos:auxiliar});
@@ -71,7 +74,7 @@ export default class CorrespondenciaObjetos extends React.Component{
 	async clonarObjetos(){
 		var auxiliar = [], pilhaTemporaria = this.state.pilhaAcoes;
 		this.state.objetos.map((item,index) => {
-			auxiliar.push({objeto:item.objeto, selecionado:false, ativo:item.ativo});
+			auxiliar.push({objeto:item.objeto,tipoObjeto:item.tipoObjeto, selecionado:false, ativo:item.ativo});
 		});
 		pilhaTemporaria.push(auxiliar);
 		await this.setState({pilhaAcoes: pilhaTemporaria});
@@ -91,9 +94,8 @@ export default class CorrespondenciaObjetos extends React.Component{
 		return vetor[this.state.parAtivo].objeto === vetor[posicao].objeto;
 	}
 
-	desativarQuadrado(posicao,vetor){
-		
-		vetor[posicao].objeto = this.state.valorDesativacao; 
+	desativarQuadrado(posicao,vetor){	
+		vetor[posicao].objeto = vetor[posicao].tipoObjeto.valorDesativacao; 
 		vetor[posicao].ativo = false;
 		vetor[posicao].selecionado = false;
 	}
@@ -105,7 +107,7 @@ export default class CorrespondenciaObjetos extends React.Component{
 	}
 
 	selecionar(posicao,vetor){
-		if(vetor[posicao].objeto !== this.state.valorDesativacao){
+		if(vetor[posicao].objeto !== vetor[posicao].tipoObjeto.valorDesativacao){
 			vetor[posicao].selecionado = true;
 			return true;
 		}
@@ -167,9 +169,7 @@ export default class CorrespondenciaObjetos extends React.Component{
 		    	numColunas: this.state.numColunas + 1,
 		    	nivel: this.state.nivel+1,
 		    	objetosPassados: this.state.objetosPassados,
-				valorDesativacao: this.state.valorDesativacao,
-				cor: this.state.cor,
-				tipo: this.state.tipo
+		    	tipo: this.state.tipo
 		    	}) 
 			},
 		    {
@@ -203,17 +203,17 @@ export default class CorrespondenciaObjetos extends React.Component{
 				style = {{margin:8,
 					height: this.state.alturaFlatList/this.state.numLinhas - 16,
 					width: this.state.larguraFlatList/this.state.numColunas - 16,
-					backgroundColor:this.state.objetos[index].ativo&&this.state.tipo === "CORES"?item.objeto:"white",
-					borderColor: this.state.objetos[index].selecionado?"#FF9200":item.objeto,
-					borderWidth: this.state.objetos[index].selecionado?this.state.tipo === "FORMAS"?5:15:0
+					backgroundColor:item.ativo&&item.tipoObjeto.tipo === "CORES"?item.objeto:"white",
+					borderColor: item.selecionado?"#FF9200":item.objeto,
+					borderWidth: item.selecionado?item.tipoObjeto.tipo === "FORMAS"?5:15:0
 					}}>
-				{this.state.tipo === "CORES"?
+				{item.tipoObjeto.tipo === "CORES"?
 					<View />
 					:
 					<Objeto funcao = {() => this.selecionarQuadrado(index)}  
-					texto = {this.state.objetos[index].ativo?item.objeto:this.state.valorDesativacao}
-					tamanho = {this.state.tipo == "FORMAS"?100 - 15*this.state.nivel:30 - 2*this.state.nivel}
-					tipo = {this.state.tipo}
+					texto = {item.ativo?item.objeto:item.tipoObjeto.valorDesativacao}
+					tamanho = {item.tipoObjeto.tipo == "FORMAS"?100 - 15*this.state.nivel:30 - 2*this.state.nivel}
+					tipo = {item.tipoObjeto.tipo}
 					objeto = {item.objeto} />
 				}
 			</TouchableOpacity>
@@ -231,7 +231,7 @@ export default class CorrespondenciaObjetos extends React.Component{
 	render(){
 		return(
 			<View style={estilos.container}>
-				<View style = {estilos.tituloGrid}>	
+				<View style = {[estilos.tituloGrid,{backgroundColor: "#FFEB83"}]}>	
 					<Titulo titulo = {"Nível "+this.state.nivel} />
 					<BotaoDesfazer aoClicar = {() => this.desfazer()} 
 			                   titulo = "DESFAZER" 
@@ -249,9 +249,9 @@ export default class CorrespondenciaObjetos extends React.Component{
 					  this.setState({alturaFlatList: height, larguraFlatList: width});
 					}}
 				/>
-				<View style={estilos.voltarSeguir}>
+				<View style={[estilos.voltarSeguir,{backgroundColor: "#FFEB83"}]}>
 		            <Botao aoClicar = {() => this.props.navigation.push('MenuCorrespondencia')} 
-		                   titulo = "VOLTAR" 
+		                   titulo = "SAIR" 
 		                   operacao = {false} />
 		            <Botao aoClicar = {() => this.props.navigation.push('MenuJogos')} 
 		                   titulo = "AJUDA" 

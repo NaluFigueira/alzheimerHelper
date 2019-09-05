@@ -1,10 +1,10 @@
 {
-  "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://2d-rhx.anonymous.alzheimerhelper.exp.direct",
-  "packagerNgrokUrl": "https://packager.2d-rhx.anonymous.alzheimerhelper.exp.direct",
-  "ngrokPid": 6624,
+  "expoServerPort": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
   "devToolsPort": 19002,
-  "packagerPort": 19001,
-  "packagerPid": 9608,
+  "packagerPort": null,
+  "packagerPid": null,
   "webpackServerPort": null
 }
