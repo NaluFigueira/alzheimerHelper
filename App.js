@@ -3,7 +3,10 @@ import HomeScreen from './assets/componentes/Home'
 import MenuJogosScreen from './assets/componentes/menus/MenuJogos'
 import MenuCognicaoScreen from './assets/componentes/menus/MenuCognicao'
 import MenuCorrespondenciaScreen from './assets/componentes/menus/MenuCorrespondencia'
+import MenuPalavrasScreen from './assets/componentes/menus/MenuPalavras'
+import MenuCompletarPalavraScreen from './assets/componentes/menus/MenuCompletarPalavra'
 import CorrespondenciaObjetosScreen from './assets/componentes/correspondencia/CorrespondenciaObjetos'
+import CompletarPalavraScreen from './assets/componentes/palavras/CompletarPalavra'
 import {createStackNavigator, createAppContainer} from 'react-navigation';
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
@@ -15,7 +18,10 @@ const MainNavigator = createStackNavigator(
 	  MenuJogos: MenuJogosScreen,
 	  MenuCognicao: MenuCognicaoScreen,
 	  MenuCorrespondencia: MenuCorrespondenciaScreen,
-	  CorrespondenciaObjetos: CorrespondenciaObjetosScreen
+	  MenuPalavras: MenuPalavrasScreen,
+	  MenuCompletarPalavra: MenuCompletarPalavraScreen,
+	  CorrespondenciaObjetos: CorrespondenciaObjetosScreen,
+	  CompletarPalavra: CompletarPalavraScreen
 	},
 	{
 	  initialRouteName: "Home",
