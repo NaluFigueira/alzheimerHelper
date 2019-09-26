@@ -6,6 +6,7 @@ import MenuCorrespondenciaScreen from './assets/componentes/menus/MenuCorrespond
 import MenuPalavrasScreen from './assets/componentes/menus/MenuPalavras'
 import MenuCompletarPalavraScreen from './assets/componentes/menus/MenuCompletarPalavra'
 import CorrespondenciaObjetosScreen from './assets/componentes/correspondencia/CorrespondenciaObjetos'
+import SopaLetrasScreen from './assets/componentes/palavras/SopaLetras'
 import CompletarPalavraScreen from './assets/componentes/palavras/CompletarPalavra'
 import {createStackNavigator, createAppContainer} from 'react-navigation';
 import * as Font from 'expo-font';
@@ -21,7 +22,8 @@ const MainNavigator = createStackNavigator(
 	  MenuPalavras: MenuPalavrasScreen,
 	  MenuCompletarPalavra: MenuCompletarPalavraScreen,
 	  CorrespondenciaObjetos: CorrespondenciaObjetosScreen,
-	  CompletarPalavra: CompletarPalavraScreen
+	  SopaLetras: SopaLetrasScreen,
+	  CompletarPalavra: CompletarPalavraScreen,
 	},
 	{
 	  initialRouteName: "Home",

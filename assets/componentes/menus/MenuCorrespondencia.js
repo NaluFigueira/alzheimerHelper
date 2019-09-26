@@ -86,7 +86,7 @@ export default class MenuCorrespondencia extends React.Component{
             })}
                  titulo = "TUDO" 
                  operacao = {true} />
-          <View style={estilos.containerMaior}>
+          <View style={estilos.voltarSeguir}>
             <Botao aoClicar = {() => this.props.navigation.push('MenuCognicao')} 
                    titulo = "VOLTAR" 
                    operacao = {false} />

@@ -75,6 +75,16 @@ export default estilos = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
   },
+  letraSelecionada:{
+    fontFamily: 'Roboto-Light', 
+    fontSize: 20,
+    textDecorationLine:'underline'
+  },
+  letraNaoSelecionada:{
+    fontFamily: 'Roboto-Light', 
+    fontSize: 20,
+    
+  }
   
 })
 
