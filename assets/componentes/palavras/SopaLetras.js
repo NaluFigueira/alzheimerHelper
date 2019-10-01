@@ -16,11 +16,12 @@ export default class SopaLetras extends React.Component{
 			alturaFlatList: 0,
 			larguraFlatList: 0,
 			numColunas: 9,
-			numLinhas: 9
+			numLinhas: 9,
+			palavraSelecionada:[]
 		}
 	}
 
-	async gerarSopaLetras(){
+	gerarSopaLetras(){
 
 	  var matrizTemporaria = [], matrizFinal = [];
 	  for (var i = 0; i < 9; i++) {
@@ -56,18 +57,46 @@ export default class SopaLetras extends React.Component{
 	  
 	  }	
 
-	  await this.setState({matrizLetras:matrizFinal})
+	  this.setState({ matrizLetras: matrizFinal })
 
 	}
 
-	selecionarLetra(index){
+	verificarVitoria(){
+		if(this.state.palavraSelecionada.join('') === this.state.palavra.join('').toUpperCase())
+			this.alertarVitoria();
+	}
 
+	selecionarLetra(posicao){
+		var novaMatrizLetras = this.state.matrizLetras,
+			novaPalavraSelecionada = this.state.palavraSelecionada;
+		if(!this.state.matrizLetras[posicao].selecionado){
+			novaMatrizLetras[posicao].selecionado = true;
+			novaPalavraSelecionada.push(novaMatrizLetras[posicao].letra);
+		}
+		else{
+			novaMatrizLetras[posicao].selecionado = false;
+			novaPalavraSelecionada = novaPalavraSelecionada.filter(function(value){
+				return value !== novaMatrizLetras[posicao].letra;
+			});
+		}		
+		this.setState({matrizLetras:novaMatrizLetras,palavraSelecionada:novaPalavraSelecionada},()=>this.verificarVitoria());
 		
-		var auxiliar = this.state.matrizLetras;
-		auxiliar[index].selecionado = true;
-		this.setState({matrizLetras:auxiliar})
 	}
 
+	alertarIntroducao(){
+		Alert.alert(
+		 'SOPA DE LETRAS',
+		 "ENCONTRE A PALAVRA NA SOPA DE LETRAS. TODAS AS LETRAS DA PALAVRA DEVEM ESTAR SELECIONADAS PARA CONCLUIR A TAREFA."
+	   );
+	}
+
+	alertarVitoria(){
+		Alert.alert(
+		 'PARABÉNS, VOCÊ GANHOU!',
+		 "CLIQUE EM SOPA DE LETRAS, PARA JOGAR DE NOVO, OU TENTE OUTROS JOGOS!" 
+	   );
+	   this.props.navigation.push('MenuPalavras');
+	}
 
 	renderItem = ({item, index}) => {
 		return(
@@ -85,7 +114,7 @@ export default class SopaLetras extends React.Component{
 	};
 
 	componentWillMount(){
-
+		this.alertarIntroducao();
 		this.gerarSopaLetras();
 	}
 
