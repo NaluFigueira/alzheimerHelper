@@ -1,29 +1,34 @@
 import React from 'react';
-import HomeScreen from './assets/componentes/Home'
-import MenuJogosScreen from './assets/componentes/menus/MenuJogos'
-import MenuCognicaoScreen from './assets/componentes/menus/MenuCognicao'
-import MenuCorrespondenciaScreen from './assets/componentes/menus/MenuCorrespondencia'
-import MenuPalavrasScreen from './assets/componentes/menus/MenuPalavras'
-import MenuCompletarPalavraScreen from './assets/componentes/menus/MenuCompletarPalavra'
-import CorrespondenciaObjetosScreen from './assets/componentes/correspondencia/CorrespondenciaObjetos'
-import SopaLetrasScreen from './assets/componentes/palavras/SopaLetras'
-import CompletarPalavraScreen from './assets/componentes/palavras/CompletarPalavra'
+import Home from './assets/componentes/Home'
+import MenuJogos from './assets/componentes/menus/MenuJogos'
+import MenuCognicao from './assets/componentes/menus/MenuCognicao'
+import MenuMemoria from './assets/componentes/menus/MenuMemoria'
+import MenuCorrespondencia from './assets/componentes/menus/MenuCorrespondencia'
+import MenuPalavras from './assets/componentes/menus/MenuPalavras'
+import MenuCompletarPalavra from './assets/componentes/menus/MenuCompletarPalavra'
+import CorrespondenciaObjetos from './assets/componentes/correspondencia/CorrespondenciaObjetos'
+import SopaLetras from './assets/componentes/palavras/SopaLetras'
+import CompletarPalavra from './assets/componentes/palavras/CompletarPalavra'
+import IdentificarForma from './assets/componentes/memoria/IdentificarForma'
+import SelecionarResposta from './assets/componentes/memoria/SelecionarResposta'
 import {createStackNavigator, createAppContainer} from 'react-navigation';
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 
 const MainNavigator = createStackNavigator(
 	{
-	
-	  Home: HomeScreen,
-	  MenuJogos: MenuJogosScreen,
-	  MenuCognicao: MenuCognicaoScreen,
-	  MenuCorrespondencia: MenuCorrespondenciaScreen,
-	  MenuPalavras: MenuPalavrasScreen,
-	  MenuCompletarPalavra: MenuCompletarPalavraScreen,
-	  CorrespondenciaObjetos: CorrespondenciaObjetosScreen,
-	  SopaLetras: SopaLetrasScreen,
-	  CompletarPalavra: CompletarPalavraScreen,
+	  Home,
+	  MenuJogos,
+	  MenuCognicao,
+	  MenuMemoria,
+	  MenuCorrespondencia,
+	  MenuPalavras,
+	  MenuCompletarPalavra,
+	  CorrespondenciaObjetos,
+	  SopaLetras,
+	  CompletarPalavra,
+		IdentificarForma,
+		SelecionarResposta
 	},
 	{
 	  initialRouteName: "Home",

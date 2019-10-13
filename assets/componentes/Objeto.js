@@ -9,10 +9,12 @@ import { StyleSheet } from 'react-native'
 
 export default class Objeto extends React.Component{
 
+
   render(){
     return (
     		<View onPress = {this.props.funcao} style = {{flex:1,alignItems: 'center',justifyContent: 'center'}}>
-    		   {
+				{console.log("objeto",this.props.objeto)}
+			   {
     		   	this.props.tipo === "FORMAS"?
     		   	   	this.props.objeto === "quadrado"?
     		   	   		<View style={{width: this.props.tamanho,

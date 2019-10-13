@@ -1,7 +1,9 @@
 {
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "packagerPort": 19001,
+  "packagerPid": 15028,
+  "expoServerNgrokUrl": "https://yr-tsc.anonymous.alzheimerhelper.exp.direct",
+  "packagerNgrokUrl": "https://packager.yr-tsc.anonymous.alzheimerhelper.exp.direct",
+  "ngrokPid": 2636,
+  "devToolsPort": 19002,
+  "expoServerPort": 19000
 }
