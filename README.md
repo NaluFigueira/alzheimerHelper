@@ -11,6 +11,7 @@ Funcionalidades incluídas até o momento:
   - 06/09: Correspondência misturando Números e Formas.
   - 13/09: Letras que faltam numa palavra.
   - 20/09: Sopa de letras.
+  - 13/10: Memorize à forma.
 
 Mobile app focused on non-pharmaceutical therapies for Alzheimer's patients, in order to make these less expensive and acessible. The selected therapies focus on cognitive training and memory recovery.
 
@@ -22,3 +23,4 @@ Features included so far:
   - 09/06: Correspondence mixing Numbers and Shapes.
   - 13/09: Missing letters in a word.
   - 09/20: Soup of letters.
+  - 10/13: Memorize the shape.
