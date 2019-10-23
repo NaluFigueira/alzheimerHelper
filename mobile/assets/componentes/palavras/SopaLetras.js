@@ -102,9 +102,9 @@ export default class SopaLetras extends React.Component{
 		return(
 			<TouchableOpacity
 				onPress = {() => this.selecionarLetra(index)}
-				style = {{margin:8,
-					height: this.state.alturaFlatList/this.state.numLinhas - 16,
-					width: this.state.larguraFlatList/this.state.numColunas - 16,
+				style = {{padding:8,
+					height: this.state.alturaFlatList/this.state.numLinhas,
+					width: this.state.larguraFlatList/this.state.numColunas,
 					}}>
 				<Text onPress = {() => this.selecionarLetra(index)} style = {item.selecionado?estilos.letraSelecionada:estilos.letraNaoSelecionada} >
 		          	{item.letra}
@@ -140,7 +140,7 @@ export default class SopaLetras extends React.Component{
 					}}
 				/>
 				<View style={[estilos.voltarSeguir,{backgroundColor: "#FFEB83"}]}>
-		            <Botao aoClicar = {() => this.props.navigation.push('MenuSopaLetras')} 
+		            <Botao aoClicar = {() => this.props.navigation.push('MenuPalavras')} 
 		                   titulo = "SAIR" 
 		                   operacao = {false} />
 		            <Botao aoClicar = {() => this.props.navigation.push('MenuJogos')} 
