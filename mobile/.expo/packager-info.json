@@ -1,8 +1,9 @@
 {
   "expoServerPort": 19000,
   "packagerPort": 19001,
-  "packagerPid": 9456,
+  "packagerPid": 5880,
   "expoServerNgrokUrl": "https://yr-tsc.anonymous.mobile.exp.direct",
   "packagerNgrokUrl": "https://packager.yr-tsc.anonymous.mobile.exp.direct",
-  "ngrokPid": 8320
+  "ngrokPid": 17144,
+  "devToolsPort": 19002
 }
