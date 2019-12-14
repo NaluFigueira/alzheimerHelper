@@ -10,6 +10,7 @@ import CorrespondenciaObjetos from './assets/componentes/correspondencia/Corresp
 import SopaLetras from './assets/componentes/palavras/SopaLetras'
 import CompletarPalavra from './assets/componentes/palavras/CompletarPalavra'
 import IdentificarForma from './assets/componentes/memoria/IdentificarForma'
+import Quizz from './assets/componentes/memoria/Quizz'
 import SelecionarResposta from './assets/componentes/memoria/SelecionarResposta'
 import {createStackNavigator, createAppContainer} from 'react-navigation';
 import * as Font from 'expo-font';
@@ -28,6 +29,7 @@ const MainNavigator = createStackNavigator(
 	  SopaLetras,
 	  CompletarPalavra,
 		IdentificarForma,
+		Quizz,
 		SelecionarResposta
 	},
 	{

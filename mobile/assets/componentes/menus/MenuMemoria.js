@@ -12,7 +12,7 @@ export default class MenuJogos extends React.Component {
         })}
         titulo = "MEMORIZE A FORMA"
         operacao = {true} />
-        <Botao aoClicar = {() => this.props.navigation.push('MenuCognicao')}
+        <Botao aoClicar = {() => this.props.navigation.push('Quizz')}
           titulo = "QUIZZ"
           operacao = {true} />
         <View style={estilos.voltarSeguir}>

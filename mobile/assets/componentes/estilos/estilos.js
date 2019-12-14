@@ -29,6 +29,14 @@ export default estilos = StyleSheet.create({
     marginTop: '15%',
     marginBottom: '15%',
   },
+  imagemQuizz:{
+    alignSelf: 'center',
+    aspectRatio: 1, 
+    resizeMode: 'contain',
+    minHeight: 200,
+    marginTop: '15%',
+    marginBottom: '15%',
+  },
   botao:{
     paddingTop: 10,
     paddingBottom: 10,
@@ -84,6 +92,16 @@ export default estilos = StyleSheet.create({
     fontFamily: 'Roboto-Light', 
     fontSize: 20,
     
+  },
+  radioButton:{
+    height: 24,
+    width: 24,
+    borderRadius: 12,
+    borderWidth: 2,
+    borderColor: '#000',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#FFF',
   }
   
 })
