@@ -1,4 +1,5 @@
 import React from 'react';
+import Login from './assets/componentes/Login'
 import Home from './assets/componentes/Home'
 import MenuJogos from './assets/componentes/menus/MenuJogos'
 import MenuCognicao from './assets/componentes/menus/MenuCognicao'
@@ -18,6 +19,7 @@ import { AppLoading } from 'expo';
 
 const MainNavigator = createStackNavigator(
 	{
+		Login,
 	  Home,
 	  MenuJogos,
 	  MenuCognicao,
@@ -33,7 +35,7 @@ const MainNavigator = createStackNavigator(
 		SelecionarResposta
 	},
 	{
-	  initialRouteName: "Home",
+	  initialRouteName: "Login",
 	  defaultNavigationOptions: {
 	      header: null
 	  }

@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native'
 export default estilos = StyleSheet.create({   
   container:{
     flex: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   containerMaior:{
     flex:0.55,
@@ -102,6 +102,15 @@ export default estilos = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#FFF',
+  },
+  input:{
+    padding: 10,
+    borderRadius: 5,
+    marginVertical: 5,
+    marginHorizontal: "5%",
+    maxWidth: "90%",
+    borderColor:"#FFD917",
+    borderWidth: 2,
   }
   
 })
