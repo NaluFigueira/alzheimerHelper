@@ -1,6 +1,10 @@
 import React from 'react';
 import Login from './assets/componentes/Login'
 import Home from './assets/componentes/Home'
+import MenuLivro from './assets/componentes/menus/MenuLivro'
+import Pessoas from './assets/componentes/livro/Pessoas'
+import DetalhesPessoa from './assets/componentes/livro/DetalhesPessoa'
+import FormularioPessoa from './assets/componentes/livro/FormularioPessoa'
 import MenuJogos from './assets/componentes/menus/MenuJogos'
 import MenuCognicao from './assets/componentes/menus/MenuCognicao'
 import MenuMemoria from './assets/componentes/menus/MenuMemoria'
@@ -17,10 +21,15 @@ import {createStackNavigator, createAppContainer} from 'react-navigation';
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 
+
 const MainNavigator = createStackNavigator(
 	{
 		Login,
-	  Home,
+		Home,
+		MenuLivro,
+		Pessoas,
+		DetalhesPessoa,
+		FormularioPessoa,
 	  MenuJogos,
 	  MenuCognicao,
 	  MenuMemoria,

@@ -1,5 +1,9 @@
-import React,{useState} from 'react';
-import { Image, TextInput, Text, KeyboardAvoidingView } from 'react-native';
+import React,{useState, useEffect} from 'react';
+import { Image, 
+         TextInput, 
+         Text, 
+         KeyboardAvoidingView, 
+         AsyncStorage } from 'react-native';
 import Botao from './Botao'
 import estilos from './estilos/estilos.js';
 
@@ -9,12 +13,25 @@ export default function Login({navigation}){
     const [email, setEmail] = useState(""); 
     const [password, setPassword] = useState(""); 
 
+    useEffect(() => {
+      async function validar(){
+        const token = await AsyncStorage.getItem('token');
+        if(token !== ""){
+          api.defaults.headers.Authorization =`Bearer ${token}`;
+          navigation.push('Home')
+        }
+      }
+
+      validar();
+    }, []);
+
     handleSubmit = async () =>{
       try {
         const response = await api.post('sessions',{
           email, password
         });
         api.defaults.headers.Authorization =`Bearer ${response.data.token}`;
+        await AsyncStorage.setItem('token', response.data.token);
         navigation.push('Home',{logado: true});
       } catch (error) {
         console.log(error);
