@@ -7,8 +7,9 @@ import Question from '../app/models/Question';
 import Answer from '../app/models/Answer';
 import User from '../app/models/User';
 import Person from '../app/models/Person';
+import Event from '../app/models/Event';
 
-const models = [Image, Question, Answer, User, Person];
+const models = [Image, Question, Answer, User, Person, Event];
 
 class Database {
   constructor() {
