@@ -1,5 +1,9 @@
 import * as Yup from 'yup';
 import Person from '../models/Person';
+import fs from 'fs';
+import { resolve } from 'path'; 
+import { promisify } from 'util';
+const unlinkAsync = promisify(fs.unlink);
 
 class PersonController{
   async index(req,res){
@@ -59,6 +63,8 @@ class PersonController{
     if(!person){
       return res.status(400).json({error: "This person doesn't exist!"})
     }
+
+    await unlinkAsync(resolve(__dirname,"..", "..", ".." , "temp", "uploads",person.path));
 
     await person.update({...req.body, path});
 
