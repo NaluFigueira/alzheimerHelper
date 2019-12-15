@@ -14,7 +14,6 @@ export default estilos = StyleSheet.create({
   voltarSeguir:{
     flexDirection: 'row',
     justifyContent: 'center',
-   
   },
   logo: {
     alignSelf: 'center',
@@ -36,6 +35,16 @@ export default estilos = StyleSheet.create({
     minHeight: 200,
     marginTop: '15%',
     marginBottom: '15%',
+  },
+  imagemLivro:{
+    alignSelf: 'center',
+    aspectRatio: 1, 
+    height:'100%',
+  },
+  tituloLivro:{
+    color: 'white',
+    fontFamily: 'Roboto-Bold',
+    fontSize: 24
   },
   botao:{
     paddingTop: 10,
@@ -111,7 +120,39 @@ export default estilos = StyleSheet.create({
     maxWidth: "90%",
     borderColor:"#FFD917",
     borderWidth: 2,
+  },
+  absoluteView:{
+    flex: 1,
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0,0,0,0.5)'
+  },
+  informacao:{
+    flexDirection: 'row', 
+    marginHorizontal: 20,
+    marginVertical: 5,
+    flexWrap:"wrap",
+    alignItems: "baseline"
+  },
+  informacaoTitulo:{
+    marginLeft: 15,
+    fontWeight:"bold",
+    fontSize: 16,
+    fontFamily: 'Roboto-Bold',
+    textDecorationLine: "underline"
+  },
+  informacaoConteudo:{
+    marginLeft: 15,
+    fontFamily: 'Roboto-Light',
+    fontSize: 16
+  },
+  nomeArquivo:{
+    fontFamily: 'Roboto-Bold',
+    alignSelf: "center",
+    marginHorizontal: 20,
   }
-  
 })
 

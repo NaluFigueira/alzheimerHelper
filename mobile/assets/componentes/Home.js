@@ -1,10 +1,24 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View, Image, AsyncStorage } from 'react-native';
 import Botao from './Botao'
 import estilos from './estilos/estilos.js';
 
-export default class Home extends React.Component{
 
+export default class Home extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      token: ""
+    }
+  }
+
+  async componentDidMount(){
+    const token = await AsyncStorage.getItem('token');
+    if(token !== ""){
+      this.setState({token})
+    }
+  }
+  
   render(){
     return (
         <View style={estilos.container}>
@@ -13,8 +27,8 @@ export default class Home extends React.Component{
                     source={require('../imagens/logo.png')}
                   />
               {
-                this.props.navigation.getParam('logado')&& <Botao 
-                      aoClicar = {() => this.props.navigation.push('MenuJogos')}
+                this.state.token !== "" && <Botao 
+                      aoClicar = {() => this.props.navigation.push('MenuLivro')}
                       titulo = "LIVRO DE RECORDAÇÕES" 
                       operacao = {true} 
                 />

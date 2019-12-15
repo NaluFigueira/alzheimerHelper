@@ -26,12 +26,10 @@ class PersonController{
       relationship: Yup.string(),
       curiosities: Yup.string(),
     });
-
     if(await !(schema.isValid(req.body)))
       return res.status(400).json({error: 'Invalid request data!'})
     const {filename:path} = req.file; 
     const {first_name, last_name} = req.body;
-    
     const person = await Person.findOne({where: {first_name, last_name, user_id: req.userId}});
 
     if(person){
