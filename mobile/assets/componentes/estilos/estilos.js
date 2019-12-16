@@ -38,7 +38,7 @@ export default estilos = StyleSheet.create({
   },
   imagemLivro:{
     alignSelf: 'center',
-    aspectRatio: 1, 
+    aspectRatio: 1,
     height:'100%',
   },
   tituloLivro:{

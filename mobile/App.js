@@ -1,10 +1,14 @@
 import React from 'react';
+import {AsyncStorage} from 'react-native';
 import Login from './assets/componentes/Login'
 import Home from './assets/componentes/Home'
 import MenuLivro from './assets/componentes/menus/MenuLivro'
 import Pessoas from './assets/componentes/livro/Pessoas'
+import Eventos from './assets/componentes/livro/Eventos'
 import DetalhesPessoa from './assets/componentes/livro/DetalhesPessoa'
+import DetalhesEvento from './assets/componentes/livro/DetalhesEvento'
 import FormularioPessoa from './assets/componentes/livro/FormularioPessoa'
+import FormularioEvento from './assets/componentes/livro/FormularioEvento'
 import MenuJogos from './assets/componentes/menus/MenuJogos'
 import MenuCognicao from './assets/componentes/menus/MenuCognicao'
 import MenuMemoria from './assets/componentes/menus/MenuMemoria'
@@ -21,15 +25,17 @@ import {createStackNavigator, createAppContainer} from 'react-navigation';
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 
-
-const MainNavigator = createStackNavigator(
+const MainNavigator = (logado) => createStackNavigator(
 	{
 		Login,
 		Home,
 		MenuLivro,
+		Eventos,
 		Pessoas,
 		DetalhesPessoa,
+		DetalhesEvento,
 		FormularioPessoa,
+		FormularioEvento,
 	  MenuJogos,
 	  MenuCognicao,
 	  MenuMemoria,
@@ -44,30 +50,30 @@ const MainNavigator = createStackNavigator(
 		SelecionarResposta
 	},
 	{
-	  initialRouteName: "Login",
+		initialRouteName: logado?"Home":"Login",
 	  defaultNavigationOptions: {
-	      header: null
+			header: null
 	  }
 	}
-);
-
-const AppContainer = createAppContainer(MainNavigator);
-
-export default class App extends React.Component {
-  constructor(props){
+	);
+	
+	export default class App extends React.Component {
+		constructor(props){
   	super(props);
-  	this.state = {loading: true}
+		this.state = {loading: true, logado: false}
   }
 
   async componentDidMount() {
     await Font.loadAsync({
       'Roboto-Light': require('./assets/fonts/Roboto-Light.ttf'),
       'Roboto-Bold': require('./assets/fonts/Roboto-Bold.ttf'),
-    });
-    this.setState({loading:false});
+		});
+		const token = await AsyncStorage.getItem('token');
+    this.setState({loading:false, logado: token !== null});
   }
   render(){
-  	if(this.state.loading){
+		const AppContainer = createAppContainer(MainNavigator(this.state.logado));
+		if(this.state.loading){
   		return <AppLoading />;
   	}
 	return (

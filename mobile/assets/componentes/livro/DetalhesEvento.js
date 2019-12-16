@@ -5,27 +5,26 @@ import estilos from '../estilos/estilos.js';
 import api,{ip} from '../../../src/services/api';
 import Informacao from './Informacao';
 
-export default function DetalhesPessoa({navigation}) {
-  const [pessoa, setPessoa] = useState(null);
+export default function DetalhesEvento({navigation}) {
+  const [evento, setEvento] = useState(null);
 
   useEffect(() => {
-    async function loadPessoa(){
-      const response = await api.get(`people/${navigation.getParam('id')}`);
-      setPessoa(response.data[0]);
+    async function loadEvento(){
+      const response = await api.get(`events/${navigation.getParam('id')}`);
+      setEvento(response.data[0]);
     }
 
-    loadPessoa();
+    loadEvento();
   }, []);
 
   handleDelete = () =>{
     Alert.alert(
 		  'ATENÇÃO',
-      `TEM CERTEZA QUE DESEJA DELETAR ${pessoa.first_name.toUpperCase()} `+
-      `${pessoa.last_name.toUpperCase()} DO LIVRO DE RECORDAÇÕES?`,
+		  `TEM CERTEZA QUE DESEJA DELETAR ${evento.name.toUpperCase()} DO LIVRO DE RECORDAÇÕES?`,
 		  [
 		    {text: 'SIM', onPress: async () => {
-          await api.delete(`people/${pessoa.id}`);
-          navigation.push('Pessoas');
+          await api.delete(`events/${evento.id}`);
+          navigation.push('Eventos');
         }
 			},
 		  {
@@ -38,17 +37,15 @@ export default function DetalhesPessoa({navigation}) {
 
   return (
     <View style={estilos.container}>
-      {pessoa && 
+      {evento && 
          <ScrollView style = {{flex:1}}>
             <Image
                style={estilos.imagemQuizz}
-               source={{uri: pessoa.url.replace("localhost", ip)}} 
+               source={{uri: evento.url.replace("localhost", ip)}} 
             />
-            <Informacao titulo = "Primeiro Nome:" conteudo = {pessoa.first_name} />
-            <Informacao titulo = "Ultimo Nome:" conteudo = {pessoa.last_name} />
-            <Informacao titulo = "Idade:" conteudo = {pessoa.age} />
-            <Informacao titulo = "Grau de relacionamento:" conteudo = {pessoa.relationship} />
-            <Informacao titulo = "Curiosidades:" conteudo = {pessoa.curiosities} />
+            <Informacao titulo = "Nome do Evento:" conteudo = {evento.name} />
+            <Informacao titulo = "Local:" conteudo = {evento.local} />
+            <Informacao titulo = "Detalhes:" conteudo = {evento.details} />
          </ScrollView>
       }
       
@@ -56,7 +53,7 @@ export default function DetalhesPessoa({navigation}) {
 		      <Botao aoClicar = {() => navigation.pop()} 
 		             titulo = "SAIR" 
 		             operacao = {false} />
-		      <Botao aoClicar = {() => navigation.push('FormularioPessoa',{tipo: "edit", pessoa})} 
+		      <Botao aoClicar = {() => navigation.push('FormularioEvento',{tipo: "edit", evento})} 
 		             titulo = "EDITAR" 
 		             operacao = {false} />
 		      <Botao aoClicar = {() => handleDelete()} 
