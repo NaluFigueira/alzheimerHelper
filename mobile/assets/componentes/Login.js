@@ -13,18 +13,6 @@ export default function Login({navigation}){
     const [email, setEmail] = useState(""); 
     const [password, setPassword] = useState(""); 
 
-    useEffect(() => {
-      async function validar(){
-        const token = await AsyncStorage.getItem('token');
-        if(token !== ""){
-          api.defaults.headers.Authorization =`Bearer ${token}`;
-          navigation.push('Home')
-        }
-      }
-
-      validar();
-    }, []);
-
     handleSubmit = async () =>{
       try {
         const response = await api.post('sessions',{

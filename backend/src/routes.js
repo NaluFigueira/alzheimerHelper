@@ -5,6 +5,7 @@ import AnswerController from './app/controllers/AnswerController';
 import UserController from './app/controllers/UserController';
 import SessionController from './app/controllers/SessionController';
 import PersonController from './app/controllers/PersonController';
+import EventController from './app/controllers/EventController';
 import RandomImageQuestionController from './app/controllers/RandomImageQuestionController';
 import AddMultipleQuestionsController from './app/controllers/AddMultipleQuestionsController';
 import AddMultipleAnswersController from './app/controllers/AddMultipleAnswersController';
@@ -31,6 +32,12 @@ routes.get('/people/:id', PersonController.show);
 routes.post('/people',upload.single('file'), PersonController.store);
 routes.put('/people',upload.single('file'), PersonController.update);
 routes.delete('/people/:id', PersonController.delete);
+
+routes.get('/events', EventController.index);
+routes.get('/events/:id', EventController.show);
+routes.post('/events',upload.single('file'), EventController.store);
+routes.put('/events',upload.single('file'), EventController.update);
+routes.delete('/events/:id', EventController.delete);
 
 
 export default routes;

@@ -14,7 +14,7 @@ export default class Home extends React.Component{
 
   async componentDidMount(){
     const token = await AsyncStorage.getItem('token');
-    if(token !== ""){
+    if(token !== null){
       this.setState({token})
     }
   }

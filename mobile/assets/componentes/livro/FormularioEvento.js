@@ -2,32 +2,30 @@ import React, {useState, useEffect} from 'react';
 import { KeyboardAvoidingView, TextInput,Text, Image, ScrollView, Alert, Form } from 'react-native';
 import Botao from '../Botao';
 import estilos from '../estilos/estilos.js';
+
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
+import {resolve} from 'react-native-path';
 import api,{ip} from '../../../src/services/api';
 
-export default function FormularioPessoa({navigation}) {
+export default function Formularioevento({navigation}) {
   const tipo = navigation.getParam('tipo');
-  const [primeiroNome, setPrimeiroNome] = useState("");
-  const [ultimoNome, setUltimoNome] = useState("");
-  const [idade, setIdade] = useState("");
-  const [relacionamento, setRelacionamento] = useState("");
-  const [curiosidades, setCuriosidades] = useState("");
+  const [name, setName] = useState("");
+  const [local, setLocal] = useState("");
+  const [details, setDetails] = useState("");
   const [path, setPath] = useState(null);
   const [fileName, setFileName] = useState("");
 
   useEffect(() => {
     async function loadDados(){
       if(tipo !== "add"){
-        const pessoa = navigation.getParam('pessoa');
-        setPrimeiroNome(pessoa.first_name);
-        setUltimoNome(pessoa.last_name);
-        setIdade(pessoa.age.toString());
-        setRelacionamento(pessoa.relationship);
-        setCuriosidades(pessoa.curiosities);
-        let aux = {uri: pessoa.url.replace("localhost", ip)}
+        const evento = navigation.getParam('evento');
+        setName(evento.name);
+        setLocal(evento.local);
+        setDetails(evento.details);
+        let aux = {uri: evento.url.replace("localhost", ip)}
         setPath(aux);
-        let fn = pessoa.url.split('/');
+        let fn = evento.url.split('/');
         setFileName(fn[fn.length-1]);
       }
     }
@@ -62,44 +60,53 @@ export default function FormularioPessoa({navigation}) {
     if(tipo === 'add')
       Alert.alert(
         'SUCESSO!',
-        `AGORA VOCÊ TEM ACESSO AS INFORMAÇÕES DE ${primeiroNome.toUpperCase()} `+
-        `${ultimoNome.toUpperCase()} NO SEU LIVRO DE RECORDAÇÕES!`
+        `AGORA VOCÊ TEM ACESSO AS INFORMAÇÕES DE ${name.toUpperCase()} `+
+        `NO SEU LIVRO DE RECORDAÇÕES!`
       );
     else
       Alert.alert(
         'SUCESSO!',
-        `AS INFORMAÇÕES DE ${primeiroNome.toUpperCase()} `+
-        `${ultimoNome.toUpperCase()} FORAM ATUALIZADAS!`
+        `AS INFORMAÇÕES DE ${name.toUpperCase()} `+
+        `FORAM ATUALIZADAS!`
       );
-    navigation.push('Pessoas');
+    navigation.push('Eventos');
   }
 
   function alertarErro(){
     Alert.alert(
      'ATENÇÃO',
-     "PARA INSERIR OU EDITAR UMA PESSOA É PRECISO "+
-     "INSERIR AO MENOS UMA FOTO, O PRIMEIRO E O ULTIMO NOME!" +
+     "PARA INSERIR OU EDITAR UMA evento É PRECISO "+
+     "INSERIR O NOME DO EVENTO!" +
      "INSIRA OS DADOS OBRIGATÓRIOS E TENTE NOVAMENTE!"
    );
   }
 
   handleSubmit = async () => {
-    if(primeiroNome === "" || ultimoNome === "" || path === null){
+    if(name === "" || local === ""){
       alertarErro();
     }
     else{
       try {
         let formData = new FormData();
         const extension = fileName.split('.');
-        formData.append("file",{uri: path.uri, name: fileName, type: "image/"+extension[extension.length-1]});
-        formData.append("first_name",primeiroNome);
-        formData.append("last_name",ultimoNome);
-        formData.append("age",parseInt(idade));
-        formData.append("relationship",relacionamento);
-        formData.append("curiosities",curiosidades);
+        if(path === null)
+          formData.append("file",{
+            uri: 'file://' + resolve(__dirname, "..", "..", "imagens", "noImage.png"),
+            type: "image/png",
+            name: "noImage.png"
+          });
+        else
+          formData.append("file",{
+            uri: path.uri, 
+            name: fileName, 
+            type: "image/"+extension[extension.length-1]
+          });
+        formData.append("name",name);
+        formData.append("local",local);
+        formData.append("details",details);
         if(tipo === 'add'){
           await api
-          .post(`people`, formData, {
+          .post(`events`, formData, {
               headers: {
                   Accept: 'application/json',
                   'Content-Type': 'multipart/form-data',
@@ -108,7 +115,7 @@ export default function FormularioPessoa({navigation}) {
         }
         else{
           await api
-          .put(`people`, formData, {
+          .put(`events`, formData, {
               headers: {
                   Accept: 'application/json',
                   'Content-Type': 'multipart/form-data',
@@ -126,41 +133,26 @@ export default function FormularioPessoa({navigation}) {
     <ScrollView contentContainerStyle = {{flexGrow:1, justifyContent:"center", paddingVertical: 40}}>
       <KeyboardAvoidingView behavior="padding">
           <TextInput
-            placeholder="PRIMEIRO NOME"
+            placeholder="NOME"
             placeholderTextColor="#aaa"
-            style = {estilos.input}
             editable={tipo === 'add'}
-            onChangeText={(primeiroNome) => setPrimeiroNome(primeiroNome)}
-            value={primeiroNome}
+            style = {estilos.input}
+            onChangeText={(name) => setName(name)}
+            value={name}
             />
           <TextInput
-            placeholder="ULTIMO NOME"
+            placeholder="LOCAL"
             placeholderTextColor="#aaa"
             style = {estilos.input}
-            editable={tipo === 'add'}
-            onChangeText={(ultimoNome) => setUltimoNome(ultimoNome)}
-            value={ultimoNome}
+            onChangeText={(local) => setLocal(local)}
+            value={local}
           />
           <TextInput
-            placeholder="IDADE"
+            placeholder="DETALHES"
             placeholderTextColor="#aaa"
             style = {estilos.input}
-            onChangeText={(idade) => setIdade(idade)}
-            value={idade}
-          />
-          <TextInput
-            placeholder="GRAU DE RELACIONAMENTO"
-            placeholderTextColor="#aaa"
-            style = {estilos.input}
-            onChangeText={(relacionamento) => setRelacionamento(relacionamento)}
-            value={relacionamento}
-          />
-          <TextInput
-            placeholder="CURIOSIDADES"
-            placeholderTextColor="#aaa"
-            style = {estilos.input}
-            onChangeText={(curiosidades) => setCuriosidades(curiosidades)}
-            value={curiosidades}
+            onChangeText={(details) => setDetails(details)}
+            value={details}
           />
           <Botao aoClicar = {() => chooseFile()}
                 titulo = "ESCOLHER FOTO" 
@@ -176,7 +168,7 @@ export default function FormularioPessoa({navigation}) {
             <Text style ={estilos.nomeArquivo}>Nenhum arquivo seleiconado</Text>
           }
           <Botao aoClicar = {() => handleSubmit()}
-                titulo = {tipo === 'add'?"ADICIONAR PESSOA":"CONCLUIR EDIÇÃO"} 
+                titulo = {tipo === 'add'?"ADICIONAR EVENTO":"CONCLUIR EDIÇÃO"} 
                 operacao = {false} />
     </KeyboardAvoidingView>
       </ScrollView>
